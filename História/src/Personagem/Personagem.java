@@ -1,28 +1,16 @@
 package Personagem;
 public class Personagem{
     public String nome;
-    public String raca;
-    public String classe;
-    public int energia;
-    public Personagem(String nome,String raca, String classe, int energia){
+    public String etnia;
+    public String parentesco;
+    public int idade;
+    public String traço;
+    public Personagem(String nome,String etnia, String parentesco, int idade, String traço){
         this.nome = nome;
-        this.raca = raca;
-        this.classe = classe;
-        this.energia = energia;
+        this.etnia = etnia;
+        this.parentesco = parentesco;
+        this.idade = idade;
+        this.traço = traço;
     }
-public static void verificaEnergia(Personagem x,Persongem y){
-    if(x.energia == 0 && y.energia == 0){
-        System.out.println(x.nome+" e "+y.nome+" estão mortos!");
-    }
-    else if(y.energia == 0){
-        System.out.println(y.nome+" está morto!");
-    }
-    else if(x.energia == 0){
-        System.out.println(x.nome+" está morto!");
-    } 
-}
-public static void tiraEnergia(Personagem x, int energia){
-    x.energia -= energia;
-    system.outprintln(x.nome+" perdeu "+energia+" de energia!");
-}
+
 }
