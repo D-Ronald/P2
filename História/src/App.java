@@ -21,7 +21,6 @@ public class App {
     System.out.println("2 - "+filha.nome);
     System.out.println("3 - "+jardineiro.nome);
     int investigarCulpado = sc.nextInt();
-
         if (investigarCulpado == 1){
             System.out.print("O policial pede para a "+mae.nome+" detalhar o que ela fez na noite do crime.");
             System.out.println(mae.nome+" Escolhendo a roupa para um jantar importante que teria no dia seguinte.");
@@ -76,9 +75,6 @@ public class App {
         else{
             System.out.println("Opção inválida");
         }
-
-
-
     sc.close();
 /*main*/}
 /*App*/}
