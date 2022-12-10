@@ -4,13 +4,14 @@ public class App {
     public static void main(String[] args) throws Exception {
     Scanner sc = new Scanner(System.in);
 //construindo personagens
-    Personagem mae = new Personagem("Mãe","branca","mãe(Adotiva)", 40, "Gananciosa");
-    Personagem pai = new Personagem("Pai","judeu","Pai(adotivo)", 55, "Rico");
-    Personagem filho = new Personagem("Ele","Preto","Filho", 8, "Simples");
-    Personagem filha = new Personagem("Amorzinho","branca","irmã(Adotiva)", 15, "Mimada");
-    Personagem jardineiro = new Personagem("Jardineiro", "Afro-latino", "Pai", 35, "Honesto");
+    Personagem mae = new Personagem(" Mãe ",100,"branca","mãe(Adotiva)", 40, "Gananciosa");
+    Personagem pai = new Personagem("Pai ",100,"judeu","Pai(adotivo)", 55, "Rico");
+    Personagem filho = new Personagem("Ele",100,"Preto","Filho", 8, "Simples");
+    Personagem filha = new Personagem("Amorzinho",100,"branca","irmã(Adotiva)", 15, "Mimada");
+    Personagem jardineiro = new Personagem("Jardineiro",100, "Afro-latino", "Pai", 35, "Honesto");
 //iniciando a trama
-    System.out.println("O dono de uma mansão foi morto, e a polícia pssui um suspeito (apesar de claramente essa suspeita ser principalmente advinda de seus preconceitos).");
+    pai.tiraEnergia(pai, 100);
+    System.out.println("O dono de uma mansão foi morto, e a polícia possui um suspeito (apesar de claramente essa suspeita ser principalmente advinda de seus preconceitos).");
     System.out.println("Porém o filho adotivo dessa família fez uma descoberta que pode mudar o rumo da investigação, '"+filho.nome+"' encontrou a arma do crime.");
     System.out.println("Então, a polícia decidiu continuar na casa buscando por pistas que levassem ao real culpado.");
     System.out.print("Escutando atentamente a conversa da polícia, '"+filho.nome+"' escolhe uma linha de investigação para ajudar a provar a inocência de seu amigo "+jardineiro.nome+".");
@@ -40,7 +41,8 @@ public class App {
             System.out.println("2 - Não");
             int escolhaCarta = sc.nextInt();
         if (escolhaCarta == 1){
-            System.out.println("Ao entregar a carta para a polícia, a "+mae.nome+" é presa por assassinato.");
+            System.out.println(filho.nome+" está a caminho da delegacia com a carta na mão, quando é brutalmente atacado por um homem desconhecido.");
+            filho.tiraEnergia(filho, 100);
             System.out.println("A polícia descobre que a "+mae.nome+" tinha um amante e matou o marido para ficar com o dinheiro dele.");
         }
         else if (escolhaCarta == 2){
@@ -76,5 +78,6 @@ public class App {
             System.out.println("Opção inválida");
         }
     sc.close();
+    
 /*main*/}
 /*App*/}
