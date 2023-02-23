@@ -5,55 +5,110 @@ import Personagem.Personagem;
 import java.util.Scanner;
 
 public class Capitulo {
-    String nome;
-    String Texto;
-    String[] escolhas;
-    Personagem personagem;
-    int alteracaoEnergia;
-    public int escolhido;
-    Scanner entrada= new Scanner(System.in);
+    private String nome;
+    private String Texto;
+    private String[] escolhas;
+    private Personagem personagem;
+    private int alteracaoEnergia;
+    private int escolhido;
+    private Scanner entrada = new Scanner(System.in);
 
-    public Capitulo(String nome, String texto,String[] escolhas, Personagem personagem,
+    public Capitulo(String nome, String texto, String[] escolhas, Personagem personagem,
             int alteracaoEnergia, Scanner entrada) {
-        this.nome = nome;
-        Texto = texto;
-        this.escolhas = escolhas;
-        this.personagem = personagem;
-        this.alteracaoEnergia = alteracaoEnergia;
-        this.entrada = entrada;
+        setNome(nome);
+        setTexto(texto);
+        setEscolhas(escolhas);
+        setPersonagem(personagem);
+        setAlteracaoEnergia(alteracaoEnergia);
+        setEntrada(entrada);
     }
 
     public void mostrar() {
         System.out.println(Texto);
-        if (escolhas.length == 0) {
+        if (getEscolhas().length == 0) {
             System.out.println("Não há escolhas");
-        }
-        else{
+        } else {
             System.out.println("Escolha uma opção: ");
-        for (int i = 0; i < escolhas.length; i++) {
-            System.out.println(i+1 + " - " + escolhas[i]);
+            for (int i = 0; i < escolhas.length; i++) {
+                System.out.println(i + 1 + " - " + escolhas[i]);
+            }
+            int escolha = escolha();
+            if (escolha == -1) {
+                System.out.println("Opção inválida");
+            }
+            if (escolha == 0) {
+                personagem.setEnergia(personagem.getEnergia()-getAlteracaoEnergia());
+            }
+            System.out.println("Energia: " + personagem.getEnergia());
         }
-        int escolha= escolha();
-        if(escolha == -1){
-            System.out.println("Opção inválida");
-        }
-        if (escolha == 0) {
-            personagem.energia -= alteracaoEnergia;
-        }
-        System.out.println("Energia: " + personagem.energia);
-    }   
     }
 
     public int escolha() {
         String escolha = entrada.nextLine();
-                for (int i = 0; i < escolhas.length; i++) {
-            if (escolhas[i].equals(escolha)) {
-                this.escolhido = i;
+        for (int i = 0; i <getEscolhas().length; i++) {
+            if (getEscolhas()[i].equals(escolha)) {
+                setEscolhido(i);
                 return i;
             }
         }
         return -1;
-        
+
     }
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTexto() {
+        return Texto;
+    }
+
+    public void setTexto(String texto) {
+        Texto = texto;
+    }
+
+    public String[] getEscolhas() {
+        return escolhas;
+    }
+
+    public void setEscolhas(String[] escolhas) {
+        this.escolhas = escolhas;
+    }
+
+    public Personagem getPersonagem() {
+        return personagem;
+    }
+
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
+    }
+
+    public int getAlteracaoEnergia() {
+        return alteracaoEnergia;
+    }
+
+    public void setAlteracaoEnergia(int alteracaoEnergia) {
+        this.alteracaoEnergia = alteracaoEnergia;
+    }
+
+    public int getEscolhido() {
+        return escolhido;
+    }
+
+    public void setEscolhido(int escolhido) {
+        this.escolhido = escolhido;
+    }
+
+    public Scanner getEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(Scanner entrada) {
+        this.entrada = entrada;
+    }
+
 }
