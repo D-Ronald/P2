@@ -4,39 +4,41 @@ import Personagem.Personagem;
 import Personagem.Personagem;
 import java.util.Scanner;
 
-public class Capitulo {
-    String nome;
-    String Texto;
-    String[] escolhas;
-    public Capitulo proximoEscolha1;
-    public Capitulo proximoEscolha2;
-    Personagem personagem;
-    public int alteracaoEnergia1;
-    public int alteracaoEnergia2;
-    public int escolhido;
-    Scanner entrada = new Scanner(System.in);
+import Escolha.Escolha;
 
-    public Capitulo(String nome, String texto, String[] escolhas, Personagem personagem,
+public class Capitulo {
+    private String nome;
+    private String Texto;
+    private String[] escolhas;
+    private Capitulo proximoEscolha1;
+    private Capitulo proximoEscolha2;
+    private Personagem personagem;
+    private int alteracaoEnergia1;
+    private int alteracaoEnergia2;
+    private int escolhido;
+    private Scanner entrada = new Scanner(System.in);
+
+    public Capitulo(String nome, String texto,String[] escolhas, Personagem personagem,
             int alteracaoEnergia1, int alteracaoEnergia2, Scanner entrada) {
-        this.nome = nome;
-        this.Texto = texto;
-        this.escolhas = escolhas;
-        this.personagem = personagem;
-        this.alteracaoEnergia1 = alteracaoEnergia1;
-        this.alteracaoEnergia2 = alteracaoEnergia2;
-        this.entrada = entrada;
+        setNome(nome);
+        setTexto(texto);
+        setPersonagem(personagem);
+        setAlteracaoEnergia1(alteracaoEnergia1);
+        setAlteracaoEnergia2(alteracaoEnergia2);
+        setEntrada(entrada);
+        setEscolhas(escolhas);
+    }
+
+    public Capitulo(String nome, String texto, Personagem personagem, int i, int j, Scanner sc) {
+        setNome(nome);
+        setTexto(texto);
+        setPersonagem(personagem);
     }
 
     public Capitulo(String nome, String texto, Personagem personagem) {
-        this.nome = nome;
-        this.Texto = texto;
-        this.personagem = personagem;
-    }
-
-    public Capitulo(String nome, String texto, Personagem personagem, int alteracaoEnergia) {
-        this.nome = nome;
-        this.Texto = texto;
-        this.personagem = personagem;
+        setNome(nome);
+        setTexto(texto);
+        setPersonagem(personagem);
     }
 
     public void comEscolhas() {
@@ -44,14 +46,14 @@ public class Capitulo {
         int escolha = escolha();
         escolhaInvalida(escolha);
         if (escolha == 0) {
-            personagem.energia -= alteracaoEnergia1;
+            personagem.setEnergia(personagem.getEnergia() - alteracaoEnergia1);
 
             proximoEscolha1.mostrar();
             if (semEnergia()) {
                 morreu();
             }
         } else if (escolha == 1) {
-            personagem.energia -= alteracaoEnergia2;
+            personagem.setEnergia(personagem.getEnergia() - alteracaoEnergia2);
 
             proximoEscolha2.mostrar();
             if (semEnergia()) {
@@ -62,9 +64,9 @@ public class Capitulo {
 
     public int escolha() {
         String escolha = entrada.nextLine();
-        for (int i = 0; i < escolhas.length; i++) {
+        for (int i = 0; i < getEscolhas().length; i++) {
             if (escolhas[i].equals(escolha)) {
-                this.escolhido = i;
+                setEscolhido(i);
                 return i;
             }
         }
@@ -74,8 +76,8 @@ public class Capitulo {
 
     public void mostrarEscolhas() {
         System.out.println("Escolhas:");
-        for (int i = 0; i < this.escolhas.length; i++) {
-            System.out.println(this.escolhas[i]);
+        for (int i = 0; i < getEscolhas().length; i++) {
+            System.out.println(getEscolhas()[i]);
         }
         System.out.print("opção: ");
     }
@@ -90,27 +92,27 @@ public class Capitulo {
     }
 
     public void mostrarEnegia() {
-        System.out.println("Energia: " + personagem.energia);
+        System.out.println("Energia: " + personagem.getEnergia());
     }
 
     public boolean semEnergia() {
-        if (personagem.energia <= 0) {
+        if (personagem.getEnergia() == 0) {
             return true;
         }
         return false;
     }
 
     public void morreu() {
-        System.out.println(personagem.nome + "ficou sem energia");
+        System.out.println(personagem.getNome() + "ficou sem energia");
         System.out.println("Fim");
         System.exit(0);
     }
 
     public void mostrar() {
-        System.out.println("-----------" + this.nome + "-----------\n" + this.Texto);
+        System.out.println("-----------" + getNome() + "-----------\n" + getTexto());
 
-        if (this.escolhas == null || this.escolhas.length == 0) {
-            personagem.energia -= 100;
+        if (getEscolhas() == null || getEscolhas().length == 0) {
+            personagem.setEnergia(personagem.getEnergia() - 100);
             if (semEnergia()) {
                 morreu();
             }
@@ -120,6 +122,98 @@ public class Capitulo {
 
         }
 
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTexto() {
+        return Texto;
+    }
+
+    public void setTexto(String texto) {
+        Texto = texto;
+    }
+
+    public String[] getEscolhas() {
+        return escolhas;
+    }
+
+    public void setEscolhas(String[] escolhas) {
+        this.escolhas = escolhas;
+    }
+
+    public Capitulo getProximoEscolha1() {
+        return proximoEscolha1;
+    }
+
+    public void setProximoEscolha1(Capitulo proximoEscolha1) {
+        this.proximoEscolha1 = proximoEscolha1;
+    }
+
+    public Capitulo getProximoEscolha2() {
+        return proximoEscolha2;
+    }
+
+    public void setProximoEscolha2(Capitulo proximoEscolha2) {
+        this.proximoEscolha2 = proximoEscolha2;
+    }
+
+    public Personagem getPersonagem() {
+        return personagem;
+    }
+
+    public void setPersonagem(Personagem personagem) {
+        this.personagem = personagem;
+    }
+
+    public int getAlteracaoEnergia1() {
+        return alteracaoEnergia1;
+    }
+
+    public void setAlteracaoEnergia1(int alteracaoEnergia1) {
+        if (alteracaoEnergia1 < 0) {
+            alteracaoEnergia1 = 0;
+        } else if (alteracaoEnergia1 > 100) {
+            alteracaoEnergia1 = 100;
+        } else {
+            this.alteracaoEnergia1 = alteracaoEnergia1;
+        }
+    }
+
+    public int getAlteracaoEnergia2() {
+        return alteracaoEnergia2;
+    }
+
+    public void setAlteracaoEnergia2(int alteracaoEnergia2) {
+        if (alteracaoEnergia2 < 0) {
+            alteracaoEnergia2 = 0;
+        } else if (alteracaoEnergia2 > 100) {
+            alteracaoEnergia2 = 100;
+        } else {
+            this.alteracaoEnergia2 = alteracaoEnergia2;
+        }
+    }
+
+    public int getEscolhido() {
+        return escolhido;
+    }
+
+    public void setEscolhido(int escolhido) {
+        this.escolhido = escolhido;
+    }
+
+    public Scanner getEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(Scanner entrada) {
+        this.entrada = entrada;
     }
 
 }
